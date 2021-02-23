@@ -29,8 +29,9 @@ use App\Http\Controllers\ContactController;
 //     return new \App\Models\Example($collaborator, $foo);
 // });
 
-
-Route::get('payments/create', [App\Http\Controllers\PaymentsController::class, 'create'])->middleware('auth');
+use App\Http\Controllers\PaymentsController;
+Route::get('payments/create', [PaymentsController::class, 'create'])->middleware('auth');
+Route::post('payments/create', [PaymentsController::class, 'store'])->middleware('auth');
 
 Auth::routes();
 
