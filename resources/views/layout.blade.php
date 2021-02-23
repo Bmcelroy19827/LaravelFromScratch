@@ -59,6 +59,8 @@ Released   : 20140225
                                 {{ Auth::user()->name }}
                             </a>
     
+                        </li>
+                        <li>
                             <div >
                                 <a  href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
