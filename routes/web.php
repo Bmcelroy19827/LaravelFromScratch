@@ -29,19 +29,14 @@ use App\Http\Controllers\ContactController;
 //     return new \App\Models\Example($collaborator, $foo);
 // });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('payments/create', [App\Http\Controllers\PaymentsController::class, 'create'])->middleware('auth');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/', [PagesController::class, 'home'])->middleware('auth');
+Route::get('/', [App\Http\Controllers\PagesController::class, 'home'])->middleware('auth');
 
 //Route::get('/',  function(App\Models\Example $example){ //Just ask for it  // function () {
 
@@ -116,11 +111,6 @@ Route::get('/articles/create', [ArticlesController::class, 'create']);
 Route::get('/articles/{article}', [ArticlesController::class, 'show'])->name('articles.show'); // Named route
 Route::get('/articles/{article}/edit', [ArticlesController::class, 'edit']);
 Route::put('/articles/{article}', [ArticlesController::class, 'update']);
-
-use App\Models\PaymentsController;
-
-Route::get('/payments.create', [PaymentsController::class, 'create'])->middleware('auth');
-
 
 
 // REST

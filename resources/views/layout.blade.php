@@ -20,6 +20,9 @@ Released   : 20140225
     <link href="/css/default.css" rel="stylesheet"/>
     <link href="/css/fonts.css" rel="stylesheet" />
 
+        <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
     @yield('head')
     
 </head>
@@ -27,19 +30,6 @@ Released   : 20140225
 
     <div id="header-wrapper">
         <div id="header" class="container">
-            @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
             <div id="logo">
                 <h1><a href="/">SimpleWork</a></h1>
             </div>
@@ -50,6 +40,38 @@ Released   : 20140225
                     <li class="{{ Request::is('about')  ?  'current_page_item' : ''}}"><a href="/about" accesskey="3" title="">About Us</a></li>
                     <li class="{{ Request::path() === 'articles' ? 'current_page_item' : ''}}"><a href="/articles" accesskey="4" title="">Articles</a></li>
                     <li class="{{ Request::path() === 'contact' ?  'current_page_item' : ''}}"><a href="/contact" accesskey="5" title="">Contact Us</a></li>
+                    <!-- Authentication Links -->
+                    @guest
+                        @if (Route::has('login'))
+                            <li >
+                                <a href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                        @endif
+                        
+                        @if (Route::has('register'))
+                            <li >
+                                <a  href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                    @else
+                        <li >
+                            <a href="#"v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+    
+                            <div >
+                                <a  href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+    
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest         
                 </ul>
             </div>
         </div>
