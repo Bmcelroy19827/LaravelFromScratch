@@ -17,6 +17,10 @@ use App\Http\Controllers\ContactController;
 |
 */
 
+
+
+
+
 // Laravels container - stored in App\Providers\AppServiceProvider
 // app()->bind('App\Models\Example', function () {
 //     //fetch $foo from config >> services.php
@@ -25,6 +29,17 @@ use App\Http\Controllers\ContactController;
 //     return new \App\Models\Example($collaborator, $foo);
 // });
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/', [PagesController::class, 'home'])->middleware('auth');
 
@@ -50,9 +65,6 @@ Route::get('/', [PagesController::class, 'home'])->middleware('auth');
    // return view('welcome');
 //});
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
 
 Route::get('/test', function () {
 
