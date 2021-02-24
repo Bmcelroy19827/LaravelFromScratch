@@ -12,7 +12,7 @@ class ArticlesController extends Controller
     public function test_policy(Article $article){
         $this->authorize('update', $article);
 
-        dd("Grats, you've made it here with a 403: forbidden error.");
+        dd("Grats, you've made it here without a 403: forbidden error.");
     }
 
     public function show(Article $article){
