@@ -6,19 +6,24 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Messages\NexmoMessage;
 
 class PaymentReceived extends Notification
 {
     use Queueable;
+
+    //hardcoded in PaymentsController as an example
+    protected $amount;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($amount)
     {
         //
+        $this->amount = $amount;
     }
 
     /**
@@ -29,7 +34,7 @@ class PaymentReceived extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database' ];//, 'nexmo'];
     }
 
     /**
@@ -49,6 +54,18 @@ class PaymentReceived extends Notification
                     ->line('Thanks!');
     }
 
+/**
+ * Get the Vonage / SMS representation of the notification.
+ *
+ * @param  mixed  $notifiable
+ * @return \Illuminate\Notifications\Messages\NexmoMessage
+ */
+    public function toNexmo($notifiable)
+    {
+        return (new NexmoMessage)
+            ->content('SMS Payment Received!');
+    }
+
     /**
      * Get the array representation of the notification.
      *
@@ -58,7 +75,8 @@ class PaymentReceived extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            //This is what will get stored in the database if that type of notification is sent
+            'amount' => $this->amount
         ];
     }
 }

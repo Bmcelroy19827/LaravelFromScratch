@@ -941,3 +941,23 @@ ul.contact li a.icon-rss:before
 {
 	float: right;
 }
+
+/*  Bryan's styles  */
+
+div.centered-flex
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+ul.notifications
+{
+    list-style-type: square;
+    list-style-image: url("/assets/images/breath.jpg");
+}
+
+ul.notifications li
+{
+    color: #2DAAE4;
+}

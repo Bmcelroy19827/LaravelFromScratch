@@ -33,6 +33,9 @@ use App\Http\Controllers\PaymentsController;
 Route::get('payments/create', [PaymentsController::class, 'create'])->middleware('auth');
 Route::post('payments/create', [PaymentsController::class, 'store'])->middleware('auth');
 
+use App\Http\Controllers\UserNotificationsController;
+Route::get('notifications', [UserNotificationsController::class, 'show'])->middleware('auth');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
