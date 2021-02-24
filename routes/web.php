@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
-use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ContactController;
 
@@ -107,7 +106,8 @@ Route::get('/about', function () {
     ]);
 });
 
-
+use App\Http\Controllers\ArticlesController;
+Route::post('/article/test/{article}', [ArticlesController::class, 'test_policy']);
 
 Route::get('/articles', [ArticlesController::class, 'index'])->name('articles.index');
 Route::post('/articles', [ArticlesController::class, 'store']);

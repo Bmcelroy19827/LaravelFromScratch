@@ -13,6 +13,22 @@
                     <p><img src="/images/banner.jpg" alt="" class="image image-full" /> </p>
                     
                     {!! $article->excerpt !!}
+                    
+                        <form action="/article/test/{{ $article->id}}" method="POST">
+                            @csrf
+                            <button
+                                type="submit"
+                                class="btn p-0 text-muted"
+                                >
+                                You're 
+                                @can('update', $article)
+                                Authorized
+                                @else
+                                UnAuthorized
+                                @endcan
+                                To Click Here
+                            </button>
+                        </form>
                 </div>
             @empty
                 <p>No relevant articles yet.</p>

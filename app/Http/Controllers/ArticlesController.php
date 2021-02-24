@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
 {
+
+    public function test_policy(Article $article){
+        $this->authorize('update', $article);
+
+        dd("Grats, you've made it here with a 403: forbidden error.");
+    }
+
     public function show(Article $article){
         // Show a single resource
             //dd($Id);
