@@ -10,6 +10,16 @@ class ArticlePolicy
 {
     use HandlesAuthorization;
 
+    // This will happen before any other checks
+    // Can basically give role level authorization
+    // Thsi can be done globally (for all policies as in this project) in AuthServiceProvider using the Gate facade
+    // public function before(User $user)
+    // {
+    //     if($user->id === 3) { // pretend they're admin
+    //         return true;
+    //     }
+    // }
+
     /**
      * Determine whether the user can update the model.
      *
