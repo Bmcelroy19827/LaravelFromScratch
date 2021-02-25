@@ -62,6 +62,33 @@ class User extends Authenticatable
         return 'can hard code phone number here';
     }
 
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class)->withTimestamps();
+    }
+
+    // $user->assignRole();
+    public function assignRole($role)
+    {
+
+        if (is_string($role)){
+            $role = Role::whereName($role)->firstOrFail();
+        }
+
+        // Will add new records if necessary but will not drop anything
+        $this->roles()->sync($role, false);
+    }
+
+    public function abilities()
+    {
+        // Get a collection of roles
+        // Map over each item in the collection and return the abilities for each
+        // Flatten out into one collection
+        // Only pull the 'name' column from the ability table
+        // Filter to unique values
+        return $this->roles->map->abilities->flatten()->pluck('name')->unique();
+    }
+
 }
 
 // $user = User::find(1); // select * from user where id = 1

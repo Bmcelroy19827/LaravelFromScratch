@@ -4,6 +4,14 @@
 
     <div id="wrapper">
         <div id="page" class="container">
+            @can('edit_forum')
+                <p>You have the ability to Edit the forum </p>
+                @else
+                    <p>You can't edit the forum</p>
+            @endcan
+            @can('view_reports')
+                <p>You can view reports</p>
+            @endcan
             @forelse($articles as $article)
 
                 <div id="content">       

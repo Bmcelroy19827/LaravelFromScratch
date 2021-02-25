@@ -130,3 +130,7 @@ Route::put('/articles/{article}', [ArticlesController::class, 'update']);
 // POST /articles
 // PUT /articles/:id
 // DELETE /articles/:id/
+
+
+// Roles based authorization
+// Moderator, Manager, Owner

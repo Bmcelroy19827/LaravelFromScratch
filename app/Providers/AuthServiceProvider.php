@@ -43,5 +43,13 @@ class AuthServiceProvider extends ServiceProvider
 
        // });
 
+       Gate::before(function ($user, $ability)
+       {
+            if($user->abilities()->contains($ability))
+            {
+                return true;
+            }
+       });
+
     }
 }
