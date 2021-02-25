@@ -109,10 +109,15 @@ Route::get('/about', function () {
 use App\Http\Controllers\ArticlesController;
 Route::post('/article/test/{article}', [ArticlesController::class, 'test_policy']);
 
-Route::get('/articles', [ArticlesController::class, 'index'])->name('articles.index');
+Route::get('/articles', [ArticlesController::class, 'index'])->name('articles.index');// Named Route
 Route::post('/articles', [ArticlesController::class, 'store']);
 Route::get('/articles/create', [ArticlesController::class, 'create']);
-Route::get('/articles/{article}', [ArticlesController::class, 'show'])->name('articles.show'); // Named route
+
+// using the 'can' middleware very similar to the blade directive with can followed by 
+// a semicolon and the name of the policy function, and then the second argument in this case is what is passed into the route
+// This is an alternative to putting the authorization in the controller action
+Route::get('/articles/{article}', [ArticlesController::class, 'show'])->name('articles.show')->middleware('can:view, article'); 
+
 Route::get('/articles/{article}/edit', [ArticlesController::class, 'edit']);
 Route::put('/articles/{article}', [ArticlesController::class, 'update']);
 

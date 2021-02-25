@@ -30,11 +30,11 @@ class AuthServiceProvider extends ServiceProvider
 
         // 3 is my user id in the database
         // with this code I am authorized to click all of the buttons on the article page
-        Gate::before(function (User $user) {
-            if ($user->id === 3) { //Bryan 
-                return true;
-            }
-        });
+        // Gate::before(function (User $user) {
+        //     if ($user->id === 3) { //Bryan 
+        //         return true;
+        //     }
+        // });
 
         //Instead of using facade as below, create a policy for the class and store the logic in there
         
